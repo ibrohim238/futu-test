@@ -1,0 +1,365 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Future documentation",
+        "description": "V1 Api docs",
+        "contact": {
+            "email": "ibrohim238@mail.ru"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/notebook": {
+            "get": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "Список записей",
+                "description": "Список записей",
+                "operationId": "e13af8b74a23d1531ac693bffafd4b80",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "count",
+                        "in": "path",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotebookResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "Добавить запись",
+                "description": "Добавить запись",
+                "operationId": "33d03b89becc1c36ef044610a5be044f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NotebookRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Notebook"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable entity.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {}
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/notebook/{id}": {
+            "get": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "Страница запися",
+                "description": "Страница запися",
+                "operationId": "f65de8f4902aeccca88dd27759e8dffc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Notebook"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "Удаление запися",
+                "description": "Удаление запися",
+                "operationId": "e04359178c0888629e5321332b9c2240",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "Обновление запися",
+                "description": "Обновление запися",
+                "operationId": "2f2327b9150a18b1031085dab9934abf",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NotebookRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Notebook"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found."
+                    },
+                    "422": {
+                        "description": "Unprocessable entity.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {}
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Notebook": {
+                "title": "Notebook",
+                "description": "Notebook model",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "full_name": {
+                        "title": "full_name",
+                        "description": "ФИО",
+                        "type": "string",
+                        "example": "Rachelle Homenick"
+                    },
+                    "company": {
+                        "title": "company",
+                        "description": "Кампания",
+                        "type": "string",
+                        "example": "Logic"
+                    },
+                    "phone": {
+                        "title": "phone",
+                        "description": "Номер телефона",
+                        "type": "string",
+                        "example": "352.662.4600"
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "Почта",
+                        "type": "string",
+                        "example": "mary.rath@yahoo.com"
+                    },
+                    "birth_date": {
+                        "title": "birth_date",
+                        "description": "Дата рождения",
+                        "example": "1976-08-09"
+                    },
+                    "created_at": {
+                        "title": "Created at",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "updated_at": {
+                        "title": "Updated at",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Notebook"
+                }
+            },
+            "NotebookRequest": {
+                "title": "Notebook request",
+                "description": "Notebook request body data",
+                "required": [
+                    "full_name",
+                    "phone",
+                    "email"
+                ],
+                "properties": {
+                    "full_name": {
+                        "title": "full_name",
+                        "description": "full_name of the new Notebook",
+                        "type": "string",
+                        "example": "A nice Notebook"
+                    },
+                    "company": {
+                        "title": "company",
+                        "description": "Company of the new Notebook",
+                        "type": "string",
+                        "example": "This is new Notebook's company"
+                    },
+                    "phone": {
+                        "title": "phone",
+                        "description": "Phone of the new Notebook",
+                        "type": "string",
+                        "example": "+7(999)999 99-99"
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "Email of the new Notebook",
+                        "type": "string",
+                        "example": "example@hotmail.com"
+                    },
+                    "birth_date": {
+                        "title": "birth_date",
+                        "description": "birth_date of the new Notebook",
+                        "type": "string",
+                        "format": "date",
+                        "example": "1999-1-1"
+                    }
+                },
+                "type": "object"
+            },
+            "NotebookResource": {
+                "title": "NotebookResource",
+                "description": "Notebook resource",
+                "properties": {
+                    "data": {
+                        "$ref": "#/components/schemas/Notebook"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "NotebookResource"
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Notebook",
+            "description": "Блокнот"
+        }
+    ]
+}
