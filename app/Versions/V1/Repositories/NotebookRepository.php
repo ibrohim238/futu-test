@@ -3,7 +3,6 @@
 namespace App\Versions\V1\Repositories;
 
 use App\Models\Notebook;
-use App\Versions\V1\Dto\NotebookDto;
 use Illuminate\Http\UploadedFile;
 
 class NotebookRepository
